@@ -2,9 +2,11 @@ package escapethebluescreen.entity.creature;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import escapethebluescreen.Handler;
 import escapethebluescreen.gfx.Assets;
+import escapethebluescreen.states.GameState;
 
 public class Player extends Creature {
 	
@@ -12,10 +14,6 @@ public class Player extends Creature {
 	private int xMobility = 8, yMobility = 4;
 	private int refreshCooldownTimer = 0;
 	private boolean refreshed;
-	
-	private boolean pausable = true;
-	public boolean paused;
-	private int fromPauseIdleTime = 0;
 
 	public void setXMobility(int xMobility) {
 		this.xMobility = xMobility;
@@ -40,42 +38,9 @@ public class Player extends Creature {
 		
 		hitBox = new Rectangle((int) (x + bounds.x), (int) (y + bounds.y), (int) (bounds.width), (int) (bounds.height));
 		
-		if(((handler.getMouseManager().getLeftClick() == true
-				&& handler.getMouseManager().getX() >= 500
-				&& handler.getMouseManager().getX() <= 700
-				&& handler.getMouseManager().getY() >= 400
-				&& handler.getMouseManager().getY() <= 500)
-				|| handler.getKeyManager().space == true)
-				&& pausable == true) {
-			pausable = false;
-			System.out.println("pausable");
-			if(paused == false) {
-				paused = true;
-			}
-			else {
-				paused = false;
-			}
-		}
-		
-		if(paused == false) {
-			System.out.println("unpaused");
-		}
-		else {
-			System.out.println("paused");
-		}
-		
-		if(pausable == false) {
-			fromPauseIdleTime += 1;
-		}
-		
-		if(fromPauseIdleTime >= 60) {
-			pausable = true;
-			fromPauseIdleTime = 0;
-		}
-		
 		//up control
 		if(handler.getKeyManager().up) {
-			if(y >= 150)
+			if(y >= 150 && GameState.paused == false)
 				y -= yMobility;
 			else
 				y -= 0;
@@ -83,7 +48,7 @@ public class Player extends Creature {
 		
 		//down control
 		if(handler.getKeyManager().down) {
-			if((int) (y + bounds.height) <= 350)
+			if((int) (y + bounds.height) <= 350 && GameState.paused == false)
 				y += yMobility;
 			else
 				y += 0;
@@ -91,7 +56,7 @@ public class Player extends Creature {
 		
 		//left control
 		if(handler.getKeyManager().left) {
-			if (x >= 200)
+			if (x >= 200 && GameState.paused == false)
 				x -= xMobility;
 			else
 				x -= 0;
@@ -99,7 +64,7 @@ public class Player extends Creature {
 		
 		//right control
 		if(handler.getKeyManager().right) {
-			if((int) (x + bounds.width) <= 480)
+			if((int) (x + bounds.width) <= 480 && GameState.paused == false)
 				x += xMobility;
 			else
 				x +=0;

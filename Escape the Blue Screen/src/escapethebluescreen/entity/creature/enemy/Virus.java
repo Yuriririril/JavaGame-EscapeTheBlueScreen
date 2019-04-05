@@ -2,6 +2,7 @@ package escapethebluescreen.entity.creature.enemy;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import escapethebluescreen.Handler;
 import escapethebluescreen.gfx.Animation;
@@ -12,6 +13,7 @@ import escapethebluescreen.states.State;
 
 public class Virus extends Enemy {
 	
+	private BufferedImage currentFrame;
 	private Animation animationLeft;
 	private Animation animationRight;
 	private int xMobility = 5;
@@ -33,7 +35,7 @@ public class Virus extends Enemy {
 			State.setState(new MenuState(handler));
 		}
 		
-		if (y <= 520) {
+		if (y <= 520 && GameState.paused == false) {
 			if (direction == 1) {
 				animationLeft.tick();
 				if (x >= 200)

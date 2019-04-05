@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import escapethebluescreen.Handler;
 import escapethebluescreen.gfx.Animation;
 import escapethebluescreen.gfx.Assets;
+import escapethebluescreen.states.GameState;
 
 public class Background extends Entity {
 	
@@ -14,13 +15,17 @@ public class Background extends Entity {
 		super(handler, x, y, 700, 500);
 		this.handler = handler;
 		
+
 		scrollDown = new Animation(1, Assets.background);
+
 	}
 
 	@Override
 	public void tick() {
 		
-		scrollDown.tick();
+		if (GameState.paused == false) {
+			scrollDown.tick();
+		}
 		
 	}
 

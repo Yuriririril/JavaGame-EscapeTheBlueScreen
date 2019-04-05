@@ -27,7 +27,7 @@ public class Bug extends Enemy {
 			State.setState(new MenuState(handler));
 		}
 		
-		if (y <= 520) {
+		if (y <= 520 && GameState.paused == false) {
 			defaultAnimation.tick();
 			y += 3;
 		}
