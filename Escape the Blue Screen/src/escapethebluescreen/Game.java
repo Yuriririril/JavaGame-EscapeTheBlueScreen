@@ -43,8 +43,8 @@ public class Game implements Runnable {
 	
 	private Handler handler;
 	
-	private GameState gameState;
-	private MenuState menuState;
+	public GameState gameState;
+	public MenuState menuState;
 	
 	public Game(String title, int width, int height) {
 		this.width = width;

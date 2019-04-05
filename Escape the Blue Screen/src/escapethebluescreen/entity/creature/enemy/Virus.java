@@ -31,6 +31,24 @@ public class Virus extends Enemy {
 		
 		if(GameState.player.getHitBox().intersects(this.hitBox)) {
 			State.setState(new MenuState(handler));
+		}
+		
+		if (y <= 520) {
+			if (direction == 1) {
+				animationLeft.tick();
+				if (x >= 200)
+					x -= xMobility;
+				else
+					direction = 0;
+			}
+			if (direction == 0) {
+				animationRight.tick();
+				if ((int) (x + bounds.width) <= 480)
+					x += xMobility;
+				else
+					direction = 1;
+			}
+			y += 3;
 		}	
 	}
 
