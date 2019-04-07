@@ -12,7 +12,7 @@ public class Utilities {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(path));
 			String line;
-			while((line = br.readLine()) != null)
+			while ((line = br.readLine()) != null)
 				builder.append(line + "\n");
 			
 			br.close();

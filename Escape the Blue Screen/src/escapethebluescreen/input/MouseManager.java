@@ -1,3 +1,11 @@
+/*
+ * The mouse manager class gets user input from
+ * mouse clicks.
+ * 
+ * Only the left click provides a control in the
+ * game and is used to confirm selections.
+ */
+
 package escapethebluescreen.input;
 
 import java.awt.event.MouseEvent;

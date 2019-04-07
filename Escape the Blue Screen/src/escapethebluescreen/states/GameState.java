@@ -1,6 +1,8 @@
 /*
  * This class creates a new game state object.
- * It contains all the entities that move in the game.
+ * 
+ * It contains the interface of the entire game 
+ * state itself.
  */
 
 package escapethebluescreen.states;
@@ -43,19 +45,19 @@ public class GameState extends State {
 		background.tick();
 		blueScreen.tick();
 		
-		for(Spawn e: spawns) {
+		for (Spawn e: spawns) {
 			e.tick();
 		}
 		
-		if(((handler.getMouseManager().getLeftClick() == true
+		if (((handler.getMouseManager().getLeftClick()
 				&& handler.getMouseManager().getX() >= 500
 				&& handler.getMouseManager().getX() <= 700
 				&& handler.getMouseManager().getY() >= 400
 				&& handler.getMouseManager().getY() <= 500)
-				|| handler.getKeyManager().space == true)
-				&& pausable == true) {
+				|| handler.getKeyManager().space)
+				&& pausable) {
 			pausable = false;
-			if(paused == false) {
+			if (!paused) {
 				paused = true;
 			}
 			else {
@@ -63,11 +65,11 @@ public class GameState extends State {
 			}
 		}
 		
-		if(pausable == false) {
+		if (!pausable) {
 			fromPauseIdleTime += 1;
 		}
 		
-		if(fromPauseIdleTime >= 60) {
+		if (fromPauseIdleTime >= 30) {
 			pausable = true;
 			fromPauseIdleTime = 0;
 		}
@@ -77,14 +79,14 @@ public class GameState extends State {
 	public void render(Graphics graphics) {
 		background.render(graphics);
 		
-		for(Spawn e: spawns) {
+		for (Spawn e: spawns) {
 			e.render(graphics);
 		}
 		
 		player.render(graphics);
 		blueScreen.render(graphics);
 		
-		if(handler.getMouseManager().getX() >= 500 && handler.getMouseManager().getX() <= 700
+		if (handler.getMouseManager().getX() >= 500 && handler.getMouseManager().getX() <= 700
 				&& handler.getMouseManager().getY() >= 400 && handler.getMouseManager().getY() <= 500) {
 			graphics.setColor(Color.RED);
 			graphics.drawRect(500, 400, 200, 100);

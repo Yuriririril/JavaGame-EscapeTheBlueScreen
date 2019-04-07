@@ -1,3 +1,12 @@
+/*
+ * The key manager class gets user input from
+ * the key board.
+ * 
+ * The active controls on the keyboard
+ * are the directional keys, the "A" key, and the
+ * spacebar.
+ */
+
 package escapethebluescreen.input;
 
 import java.awt.event.KeyEvent;

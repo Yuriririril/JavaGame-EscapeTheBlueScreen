@@ -1,5 +1,6 @@
 /*
  * This class defines the entire game.
+ * 
  * It is responsible for defining the user inputs and
  * creating the game timer.
  * 

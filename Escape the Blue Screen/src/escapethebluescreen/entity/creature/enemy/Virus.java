@@ -1,19 +1,26 @@
+/*
+ * The virus class holds the virus entity.
+ * 
+ * Upon contact with the player, the player will lose the game.
+ * 
+ * It moves left and right alternately.
+ * 
+ * It can be killed through antivirus and firewall power ups.
+ */
+
 package escapethebluescreen.entity.creature.enemy;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 
 import escapethebluescreen.Handler;
+import escapethebluescreen.entity.powerup.Firewall;
 import escapethebluescreen.gfx.Animation;
 import escapethebluescreen.gfx.Assets;
 import escapethebluescreen.states.GameState;
-import escapethebluescreen.states.MenuState;
-import escapethebluescreen.states.State;
 
 public class Virus extends Enemy {
 	
-	private BufferedImage currentFrame;
 	private Animation animationLeft;
 	private Animation animationRight;
 	private int xMobility = 5;
@@ -23,19 +30,19 @@ public class Virus extends Enemy {
 		super(handler, x, y, 22, 27);
 		this.handler = handler;
 		
-		animationLeft = new Animation(20, Assets.virusLeft);
-		animationRight = new Animation(20, Assets.virusRight);
+		animationLeft = new Animation(20, Assets.virusLeft, false);
+		animationRight = new Animation(20, Assets.virusRight, false);
 	}
 
 	@Override
 	public void tick() {
 		hitBox = new Rectangle((int) (x + bounds.x), (int) (y + bounds.y), (int) (bounds.width), (int) (bounds.height));
 		
-		if(GameState.player.getHitBox().intersects(this.hitBox)) {
-			State.setState(new MenuState(handler));
+		if (GameState.player.getHitBox().intersects(this.hitBox)) {
+			GameState.player.setDead(true);
 		}
 		
-		if (y <= 520 && GameState.paused == false) {
+		if (y <= 520) {
 			if (direction == 1) {
 				animationLeft.tick();
 				if (x >= 200)
@@ -51,7 +58,11 @@ public class Virus extends Enemy {
 					direction = 1;
 			}
 			y += 3;
-		}	
+		}
+		
+		if (this.hitBox.intersects(Firewall.killArea)) {
+			y = 520;
+		}
 	}
 
 	@Override

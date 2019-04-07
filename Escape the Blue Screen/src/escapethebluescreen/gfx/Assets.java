@@ -1,3 +1,13 @@
+/*
+ * This class is assigned to contain all graphics
+ * to be used by the entire game. Graphics include
+ * the entities, background images, and buttons to
+ * be used to ensure a user friendly interface.
+ * 
+ * The graphics are declared as buffered images
+ * which may either be stored in an array or not.
+ */
+
 package escapethebluescreen.gfx;
 
 import java.awt.image.BufferedImage;
@@ -5,13 +15,13 @@ import java.awt.image.BufferedImage;
 public class Assets {
 
 	public static BufferedImage[] background;
-	public static BufferedImage computer;
+	public static BufferedImage computerDefault;
+	public static BufferedImage[] computerRed, computerBlue;
 	public static BufferedImage[] bug, virusLeft, virusRight, malware;
+	public static BufferedImage[] bugKill, virusKill, malwareKill;
 	public static BufferedImage[] blueScreen;
 	
 	public static BufferedImage mainMenu;
-	
-	public static BufferedImage nullImage;
 	
 	public static void init() {
 		
@@ -23,7 +33,23 @@ public class Assets {
 		
 		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/SpriteSheet.png"));
 		
-		computer = sheet.crop(0, 0, 42, 38);
+		computerDefault = sheet.crop(0, 1, 42, 38);
+		
+		computerRed = new BufferedImage[8];
+		computerRed[0] = sheet.crop(0, 39, 42, 38);
+		computerRed[1] = computerDefault;
+		computerRed[2] = computerRed[0];
+		computerRed[3] = computerRed[1];
+		computerRed[4] = computerRed[0];
+		computerRed[5] = computerRed[1];
+		computerRed[6] = computerRed[1];
+		computerRed[7] = computerRed[1];
+		
+		computerBlue = new BufferedImage[4];
+		computerBlue[0] = computerDefault;
+		computerBlue[1] = sheet.crop(0, 77, 42, 38);
+		computerBlue[2] = computerBlue[0];
+		computerBlue[3] = computerBlue[1];
 		
 		bug = new BufferedImage[8];
 		bug[0] = sheet.crop(51, 7, 22, 27);
@@ -34,6 +60,12 @@ public class Assets {
 		bug[5] = bug[2];
 		bug[6] = bug[1];
 		bug[7] = bug[0];
+		
+		bugKill = new BufferedImage[4];
+		bugKill[0] = sheet.crop(124, 7, 22, 27);
+		bugKill[1] = sheet.crop(124, 34, 22, 27);
+		bugKill[2] = sheet.crop(124, 61, 22, 27);
+		bugKill[3] = sheet.crop(124, 88, 22, 27);
 		
 		virusLeft = new BufferedImage[2];
 		virusLeft[0] = sheet.crop(76, 7, 22, 27);
@@ -66,9 +98,6 @@ public class Assets {
 		blueScreen[9] = blueScreens.crop(86, 45, 539, 313);
 		
 		mainMenu = ImageLoader.loadImage("/textures/MainMenu.png");
-		
-		nullImage = ImageLoader.loadImage("/textures/NullImage.png");
 	}
-	
 	
 }
